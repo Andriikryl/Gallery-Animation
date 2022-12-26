@@ -1,25 +1,32 @@
-const menuBtn = document.querySelector(".menu-div");
-const exitBtn = document.querySelector(".exit");
 
-let t1 = gsap.timeline({ paused: true });
-t1.to(".menu", { opacity: 1, duration: 1, top: 0, ease: Power2.easeInOut });
-t1.to(
-    ".nav",
-    {
-        opacity: 1,
-        marginBottom: 0,
-        duration: 1,
-        ease: Power2.easeInOut,
-        stagger: 0.3,
-    },
-    ">-0.5"
-);
+document.addEventListener("DOMContentLoaded", function () {
 
-menuBtn.addEventListener("click", () => {
-    t1.play().timeScale(1);
-});
+    gsap.registerPlugin(ScrollTrigger);
 
-exitBtn.addEventListener("click", () => {
-    t1.timeScale(2.5);
-    t1.reverse();
-});
+    const  gsapItem = gsap.utils.toArray('.box__content');
+
+    gsapItem.forEach((gsIt)=> {
+
+        const imgNum = gsIt.querySelector('.box__text');
+        const imgInner = gsIt.querySelector('.box__inner');
+        const imgBl = gsIt.querySelector('.box__img');
+        const imgImg = gsIt.querySelector('.img');
+
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: gsIt,
+                start: "top 70%",
+                toggleAction: "play none none none",
+                // markers: true
+            }
+        });
+
+        tl.from(imgNum, 1, { opacity: 0, translateY: "80px", ease: "expo.out"})
+        tl.to(imgInner, .5, { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",ease: "expo.out"}, "-=1")
+        tl.to(imgBl, 1.5, { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",ease: "expo.out"}, "-=0.5")
+        tl.from(imgImg, 5, { scale: 1.5, filter: "blur(15px)", ease: "expo.out"}, "-=1.7")
+        
+    });
+
+
+})

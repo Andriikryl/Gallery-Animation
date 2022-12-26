@@ -1,0 +1,47 @@
+.flex-group{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    flex-wrap: wrap;
+    .box__content{
+        margin-bottom: 150px;
+        position: relative;
+        .box__text{
+            transform: rotate(-90deg);
+            display: block;
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            left: -200px;
+            top: 200px;
+        }
+
+        .box__img{
+            $n: 1;
+            $d: 1;
+            aspect-ratio: $n / $d;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 400px;
+            clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100% );
+            img{
+                inline-size: 100%;
+                block-size: 100%;
+                object-fit: cover;
+                will-change: transform;
+            }
+        }
+    }
+}
+
+.one{
+    margin-top: 140px;
+}
+
+.box__inner{
+    background-color: azure;
+    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100% );
+}
